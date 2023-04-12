@@ -91,7 +91,6 @@ else:
 # subgraph = nx.MultiGraph(G.edge_subgraph(l)) # create a MultiGraph subclass of the main graph
 # subgraph = G.subgraph(l)
 
-sub = sub[1:]
 print(sub)
 subgraph = G.subgraph(sub)
 print(args.from_acc)
