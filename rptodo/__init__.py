@@ -1,5 +1,3 @@
-"""Top-level package for RP To-Do."""
-
 __app_name__ = "rptodo"
 __version__ = "0.1.0"
 
