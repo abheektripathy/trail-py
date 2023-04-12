@@ -1,4 +1,4 @@
-txn_id,from_acc,to_acc,amount,utc
+txn_id,from_acc,to_acc,amount
 1,1,2,800
 2,2,3,3500
 3,3,4,4200
