@@ -25,6 +25,7 @@ with open("dummy_data.csv", "r") as f:
         graph.append([from_acc, to_acc, amount, date])
         G.add_edge(from_acc, to_acc, amount=amount)
     # print(graph)
+    print(graph)
 
 # parse command-line arguments
 parser = argparse.ArgumentParser(description='AML search tool')
@@ -55,6 +56,7 @@ for i in graph:
                 # if attributes.get('date', '') >= txn_date_str:
                     edges.append((from_acc, to_acc, amount, date))
                     sub.append((from_acc, to_acc))
+                print(txn_date_str)
             elif args.t == 'week':
                 # date_format = '%Y-%m-%d %H:%M:%S'
                 txn_date = datetime.strptime(args.date, date_format) - timedelta(weeks=1)
@@ -119,7 +121,6 @@ nx.draw(G, pos, with_labels=True, font_weight='bold', node_size=500, font_size=1
 edge_labels = {(u, v): d for u, v, d in G.edges(data=True)}
 nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
 plt.show()
-
 # d = nx.ego_graph(G,0123456789123456)
 # nx.draw(d, with_labels=True)
 # plt.show()
