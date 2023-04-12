@@ -10,7 +10,7 @@ G = nx.Graph()
 graph = []
 date_format = '%Y-%m-%d %H:%M:%S'
 # add nodes
-for i in range(1, 81):
+for i in range(1, 323):
     G.add_node(i)
 
 # add edges
@@ -24,6 +24,7 @@ with open("dummy_data.csv", "r") as f:
         date = str(row[4])
         graph.append([from_acc, to_acc, amount, date])
         G.add_edge(from_acc, to_acc, amount=amount)
+    # print(graph)
     print(graph)
 
 # parse command-line arguments
@@ -38,6 +39,7 @@ args = parser.parse_args()
 
 # filter edges based on command-line arguments
 edges = []
+sub = []
 for i in graph:
     from_acc = i[0]
     to_acc = i[1]
@@ -49,18 +51,22 @@ for i in graph:
                 # date_format = '%Y-%m-%d %H:%M:%S'
                 txn_date = datetime.strptime(args.date, date_format) - timedelta(days=1)
                 txn_date_str = txn_date.strftime(date_format)
-                print(txn_date_str)
+                # print(txn_date_str)
                 if date >= txn_date_str:
                 # if attributes.get('date', '') >= txn_date_str:
                     edges.append((from_acc, to_acc, amount, date))
+                    sub.append((from_acc, to_acc))
+                print(txn_date_str)
             elif args.t == 'week':
                 # date_format = '%Y-%m-%d %H:%M:%S'
                 txn_date = datetime.strptime(args.date, date_format) - timedelta(weeks=1)
                 txn_date_str = txn_date.strftime(date_format)
                 if date >= txn_date_str:
                     edges.append((from_acc, to_acc, amount, date))
+                    sub.append((from_acc, to_acc))
             else:
                 edges.append((from_acc, to_acc, amount, date))
+                sub.append((from_acc, to_acc))
                 
 
 # sort edges by transaction amount
@@ -79,10 +85,17 @@ else:
     print(f"No transactions found for account {args.from_acc}")
 
 # create a subgraph based on the filtered edges
-print(edges)
-l = [(x, y, d, w) for x, y, d, w in edges]
-print(l)
-subgraph = G.edge_subgraph(l)
+# print(edges)
+# l = [(x, y, d, w) for x, y, d, w in edges]
+# print(l)
+# subgraph = nx.MultiGraph(G.edge_subgraph(l)) # create a MultiGraph subclass of the main graph
+# subgraph = G.subgraph(l)
+
+sub = sub[1:]
+print(sub)
+subgraph = G.subgraph(sub)
+print(args.from_acc)
+# subgraph = nx.MultiGraph(G.edge_subgraph(l)) # create a MultiGraph subclass of the main graph
 # if requested, find the account with the max transactions from the given account
 if args.m:
     max_acc = -1
@@ -95,9 +108,19 @@ if args.m:
     if max_acc == -1:
         print(f"\nAccount with max transactions from {args.from_acc}: {max_acc} ({max_count} transactions)")
 
+
+# color_map = []
+# for node in G:
+#     if node < 10:
+#         color_map.append('blue')
+#     else: 
+#         color_map.append('green')      
 # draw the subgraph
-pos = nx.spring_layout(subgraph)
-nx.draw(subgraph, pos, with_labels=True, font_weight='bold', node_size=500, font_size=10)
-edge_labels = {(u, v): d for u, v, d, w in subgraph.edges(data=True)}
-nx.draw_networkx_edge_labels(subgraph, pos, edge_labels=edge_labels, font_size=8)
+pos = nx.spring_layout(G)
+nx.draw(G, pos, with_labels=True, font_weight='bold', node_size=500, font_size=10)
+edge_labels = {(u, v): d for u, v, d in G.edges(data=True)}
+nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
 plt.show()
+# d = nx.ego_graph(G,0123456789123456)
+# nx.draw(d, with_labels=True)
+# plt.show()
