@@ -1,21 +1,22 @@
 # trail-py
-A CLI tool to track money trails and different AML indicators.
+CLI tool to track money trails and analyse txns with various AML indicators.
 
 
-Description:
+### Description:<br/>
 A security CLI tool for financial auditors, which would help them display the transaction dumps, provided by the bank. in form of graphs and tables, with filters, which allow you to sort the data by a specific time frame, most monetary amounts, etc.
 
 Also, allows auto flagging of transactions based on specific AML(anti-money laundering) indicators, and displaying them as tables currently in the cli itself. Future plans include to use a deep forested ml model trained on actual txn dumps based on such AML tools and provide flagged accounts(basically accounts with a higher frequency of flagged txns) as csv or pdfs for a easier analysis.
+<br/>
+<br/>
+#### Run Locally:
 
-Run Locally:
-
-```
+```bash
 git clone
 cd /
 ```
-Example Commands
+#### Example Commands
 
-```(python)
+```py
 
 #this would show the txn flow as a graph for the account 123... above amount 4000 and for the latest month
 python trail.py 0123456789123456 -amount=4000 -t=month
