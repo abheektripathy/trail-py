@@ -15,6 +15,7 @@ you can check this [loom](https://www.loom.com/share/b48eb4aad7e44fff95490ca2c51
 ```bash
 git clone
 cd /
+#add up txn's dumps in dummy_data.csv
 ```
 #### Example Commands
 
