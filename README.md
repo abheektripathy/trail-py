@@ -6,6 +6,8 @@ CLI tool to track money trails and analyse txns with various AML indicators.
 A security CLI tool for financial auditors, which would help them display the transaction dumps, provided by the bank. in form of graphs and tables, with filters, which allow you to sort the data by a specific time frame, most monetary amounts, etc.
 
 Also, allows auto flagging of transactions based on specific AML(anti-money laundering) indicators, and displaying them as tables currently in the cli itself. Future plans include to use a deep forested ml model trained on actual txn dumps based on such AML tools and provide flagged accounts(basically accounts with a higher frequency of flagged txns) as csv or pdfs for a easier analysis.
+
+you can check this [loom](https://www.loom.com/share/b48eb4aad7e44fff95490ca2c5111e20) for a quick product pitch.
 <br/>
 <br/>
 #### Run Locally:
